@@ -1,0 +1,32 @@
+{
+  "name": "cybersecurity-portfolio",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Cybersecurity company portfolio website with 8-bit aesthetic",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0",
+    "pinia": "^2.1.7",
+    "radix-vue": "^1.8.3",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "tailwind-merge": "^2.3.2",
+    "@vueuse/core": "^11.0.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "vite": "^5.2.6",
+    "tailwindcss": "^3.4.3",
+    "postcss": "^8.4.38",
+    "autoprefixer": "^10.4.19",
+    "vue-tsc": "^2.0.14",
+    "typescript": "^5.4.5",
+    "terser": "^5.31.0"
+  }
+}

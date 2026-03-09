@@ -1,0 +1,307 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 84% 5%;
+    --foreground: 210 40% 98%;
+    --card: 222 84% 5%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 84% 5%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 142 76% 36%;
+    --primary-foreground: 355 100% 97%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 217 33% 17%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 142 76% 36%;
+    --radius: 0rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-mono;
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  /* Pixel-style scrollbar */
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+    border-left: 2px solid hsl(var(--border));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary));
+    border: 2px solid hsl(var(--border));
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #00ff66;
+  }
+}
+
+@layer components {
+  /* Pixel button base */
+  .btn-pixel {
+    @apply relative px-6 py-3 border-2 border-primary bg-primary text-primary-foreground;
+    @apply shadow-pixel transition-all duration-100;
+    @apply hover:shadow-pixel-lg hover:-translate-y-0 hover:-translate-x-0;
+    @apply active:shadow-none active:translate-x-1 active:translate-y-1;
+  }
+
+  /* Pixel card */
+  .card-pixel {
+    @apply border-2 border-border bg-card shadow-pixel;
+    @apply transition-all duration-100;
+  }
+
+  .card-pixel:hover {
+    @apply shadow-pixel-lg -translate-y-0 -translate-x-0;
+    @apply border-primary;
+  }
+
+  /* Scanline overlay effect */
+  .scanlines::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.1) 0px,
+      rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* Grid background */
+  .bg-grid {
+    background-size: 40px 40px;
+  }
+
+  /* Glitch text effect */
+  .glitch-text {
+    position: relative;
+  }
+
+  .glitch-text::before,
+  .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .glitch-text::before {
+    left: 2px;
+    text-shadow: -2px 0 #ff0055;
+    clip: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
+  }
+
+  .glitch-text::after {
+    left: -2px;
+    text-shadow: -2px 0 #00d4ff;
+    clip: rect(85px, 550px, 140px, 0);
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+  }
+
+  @keyframes glitch-anim-1 {
+    0% { clip: rect(30px, 9999px, 10px, 0); }
+    20% { clip: rect(85px, 9999px, 140px, 0); }
+    40% { clip: rect(20px, 9999px, 60px, 0); }
+    60% { clip: rect(50px, 9999px, 90px, 0); }
+    80% { clip: rect(10px, 9999px, 40px, 0); }
+    100% { clip: rect(70px, 9999px, 120px, 0); }
+  }
+
+  @keyframes glitch-anim-2 {
+    0% { clip: rect(65px, 9999px, 100px, 0); }
+    20% { clip: rect(15px, 9999px, 60px, 0); }
+    40% { clip: rect(90px, 9999px, 130px, 0); }
+    60% { clip: rect(10px, 9999px, 50px, 0); }
+    80% { clip: rect(45px, 9999px, 80px, 0); }
+    100% { clip: rect(25px, 9999px, 70px, 0); }
+  }
+
+  /* Terminal cursor blink */
+  .terminal-cursor::after {
+    content: '█';
+    animation: cursor 1s step-end infinite;
+    color: hsl(var(--primary));
+  }
+
+  /* Section spacing */
+  .section {
+    @apply py-16 px-4 md:py-24;
+  }
+
+  /* Container */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Pixel input */
+  .input-pixel {
+    @apply w-full px-4 py-3 border-2 border-border bg-background;
+    @apply text-foreground placeholder:text-muted-foreground;
+    @apply focus:outline-none focus:border-primary;
+    @apply transition-colors;
+  }
+
+  /* Text heading styles */
+  .heading-pixel {
+    @apply font-pixel text-xl md:text-2xl lg:text-3xl;
+  }
+
+  .heading-tech {
+    @apply font-tech text-3xl md:text-4xl lg:text-5xl;
+  }
+
+  /* Link styles */
+  .link-cyber {
+    @apply text-primary hover:text-cyber-green transition-colors;
+    @apply underline decoration-2 underline-offset-4;
+  }
+
+  /* Mobile menu animation */
+  .mobile-menu {
+    @apply fixed inset-0 bg-background/95 backdrop-blur-sm;
+    @apply transform transition-transform duration-200;
+  }
+
+  .mobile-menu.closed {
+    @apply translate-x-full;
+  }
+
+  .mobile-menu.open {
+    @apply translate-x-0;
+  }
+
+  /* Service card hover */
+  .service-card {
+    @apply card-pixel p-6 cursor-pointer;
+    @apply hover:border-primary;
+  }
+
+  /* Trust logo */
+  .trust-logo {
+    @apply border border-border p-4 bg-card;
+    @apply hover:border-primary hover:shadow-pixel;
+    @apply transition-all;
+  }
+
+  /* Badge styles */
+  .badge-pixel {
+    @apply inline-flex items-center px-3 py-1;
+    @apply border-2 border-primary;
+    @apply text-primary text-sm;
+  }
+
+  /* Accordion styles */
+  .accordion-item {
+    @apply border-b-2 border-border;
+  }
+
+  .accordion-trigger {
+    @apply w-full px-4 py-4 text-left flex items-center justify-between;
+    @apply hover:bg-muted/50 transition-colors;
+  }
+
+  /* Tab styles */
+  .tab-trigger {
+    @apply px-4 py-2 border-2 border-transparent;
+    @apply hover:border-muted transition-colors;
+  }
+
+  .tab-trigger.active {
+    @apply border-primary bg-primary text-primary-foreground;
+  }
+
+  /* Form styles */
+  .form-group {
+    @apply mb-4;
+  }
+
+  .form-label {
+    @apply block mb-2 font-tech text-lg;
+  }
+
+  .form-error {
+    @apply text-destructive text-sm mt-1;
+  }
+
+  /* Loading state */
+  .loading-pixel {
+    @apply inline-block animate-pulse;
+  }
+}
+
+@layer utilities {
+  /* Text glow effect */
+  .text-glow {
+    text-shadow: 0 0 10px currentColor;
+  }
+
+  /* Border glow */
+  .border-glow {
+    box-shadow: 0 0 10px hsl(var(--primary)), inset 0 0 10px hsl(var(--primary));
+  }
+
+  /* CRT flicker effect */
+  .crt-flicker {
+    animation: crt 0.15s infinite;
+  }
+
+  @keyframes crt {
+    0% { opacity: 0.97; }
+    50% { opacity: 1; }
+    100% { opacity: 0.98; }
+  }
+
+  /* Screen shake */
+  .shake {
+    animation: shake 0.5s ease-in-out;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+    20%, 40%, 60%, 80% { transform: translateX(4px); }
+  }
+}
+
+/* Selection styling */
+::selection {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+/* Focus visible styles */
+:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}

@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  web:
+    image: cr.prolifel.com/depritonet-web:latest
+    container_name: depritonet-web
+    # Expose port to Nginx Proxy Manager
+    # Option 1: Use localhost:3939 in NPM proxy host
+    ports:
+      - "3939:8888"
+    restart: unless-stopped
+    networks:
+      - webnet
+
+networks:
+  webnet:
+    driver: bridge
