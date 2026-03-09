@@ -37,3 +37,4 @@ certbot/www/*
 
 # Build artifacts
 *.tgz
+.claude/settings.local.json
